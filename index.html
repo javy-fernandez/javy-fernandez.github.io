@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Javy Fernández · Manager, .NET Engineer e IA</title>
+<meta name="description" content="Portfolio de Javier Fernández: Manager y .NET Engineer en Raona. Liderazgo técnico, arquitectura .NET, Azure, DevOps e IA aplicada al desarrollo.">
+<style>
+  :root {
+    --bg: #f7f6fb;
+    --surface: #ffffff;
+    --ink: #17152e;
+    --muted: #5d5a78;
+    --line: #dedbea;
+    --accent: #512bd4;
+    --accent-ink: #ffffff;
+    --chip: #ece8fb;
+    --ok: #0a8f4d;
+    --mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
+    --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0d0c1d;
+      --surface: #16142e;
+      --ink: #efedff;
+      --muted: #a9a5cc;
+      --line: #2a2750;
+      --accent: #b9a5ff;
+      --accent-ink: #12102a;
+      --chip: #211e47;
+      --ok: #3ecf8e;
+    }
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent); text-underline-offset: 3px; }
+  a:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+  /* Navegación */
+  header.nav {
+    position: sticky; top: 0; z-index: 10;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 58px; }
+  .brand { font-weight: 700; color: var(--ink); text-decoration: none; letter-spacing: -0.02em; }
+  .nav nav { display: flex; gap: 22px; flex-wrap: wrap; }
+  .nav nav a { color: var(--muted); text-decoration: none; font-size: 15px; }
+  .nav nav a:hover { color: var(--ink); }
+
+  /* Hero */
+  .hero { padding: 72px 0 56px; }
+  .hero .wrap { display: grid; grid-template-columns: 1.15fr 1fr; gap: 48px; align-items: center; }
+  .eyebrow { font-family: var(--mono); font-size: 14px; color: var(--muted); margin: 0 0 14px; }
+  h1 { font-size: clamp(2.3rem, 5vw, 3.6rem); line-height: 1.06; letter-spacing: -0.035em; margin: 0 0 18px; text-wrap: balance; }
+  .lead { font-size: 1.15rem; color: var(--muted); margin: 0 0 28px; max-width: 34em; }
+  .cta { display: flex; flex-wrap: wrap; gap: 12px; }
+  .btn {
+    display: inline-block; padding: 11px 20px; border-radius: 8px;
+    font-weight: 600; font-size: 16px; text-decoration: none;
+    border: 2px solid var(--accent); color: var(--accent);
+  }
+  .btn.primary { background: var(--accent); color: var(--accent-ink); }
+  .btn:hover { filter: brightness(1.1); }
+
+  .code {
+    background: #14122b;
+    color: #e6e3ff;
+    font-family: var(--mono);
+    font-size: clamp(12.5px, 1.35vw, 15px);
+    line-height: 1.8;
+    border-radius: 14px;
+    border: 1px solid #2f2b5c;
+    box-shadow: 0 24px 50px -24px rgba(40, 20, 120, .55);
+    overflow: hidden;
+  }
+  .code .bar { display: flex; align-items: center; gap: 7px; padding: 12px 16px; border-bottom: 1px solid #2f2b5c; color: #8f8ab8; font-size: 12.5px; }
+  .code .bar i { width: 10px; height: 10px; border-radius: 50%; background: #3a3670; }
+  .code .bar span { margin-left: 8px; }
+  .code pre { margin: 0; padding: 20px 22px 24px; overflow-x: auto; font: inherit; }
+  .k { color: #c4a7ff; } .s { color: #9be9a8; } .n { color: #ffd580; } .t { color: #7fd1ff; } .c { color: #7c78a6; }
+
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 56px; }
+  .stat { border-top: 2px solid var(--ink); padding-top: 14px; }
+  .stat b { display: block; font-size: 2rem; letter-spacing: -0.03em; line-height: 1.1; font-variant-numeric: tabular-nums; }
+  .stat span { color: var(--muted); font-size: 15px; }
+
+  /* Secciones */
+  section { padding: 64px 0; border-top: 1px solid var(--line); }
+  h2 { font-size: 1.9rem; letter-spacing: -0.025em; margin: 0 0 8px; }
+  .kicker { font-family: var(--mono); font-size: 13px; color: var(--accent); text-transform: uppercase; letter-spacing: .08em; margin: 0 0 6px; }
+  .sub { color: var(--muted); margin: 0 0 32px; max-width: 44em; }
+
+  .about { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+  .about p { margin: 0 0 16px; }
+
+  /* Áreas */
+  .areas { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .area { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 24px; }
+  .area .num { font-family: var(--mono); font-size: 13px; color: var(--accent); }
+  .area h3 { margin: 6px 0 10px; font-size: 1.2rem; letter-spacing: -0.015em; }
+  .area ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: 15.5px; }
+  .area li { margin-bottom: 6px; }
+
+  /* Experiencia */
+  .timeline { list-style: none; margin: 0; padding: 0; }
+  .job { display: grid; grid-template-columns: 190px 1fr; gap: 24px; padding: 22px 0; border-top: 1px solid var(--line); }
+  .job:first-child { border-top: 0; padding-top: 0; }
+  .when { font-family: var(--mono); font-size: 13.5px; color: var(--muted); padding-top: 4px; }
+  .job h3 { margin: 0 0 6px; font-size: 1.12rem; letter-spacing: -0.01em; }
+  .job p { margin: 0; }
+  .job ul { margin: 0; padding-left: 18px; }
+  .job li { margin-bottom: 4px; }
+  .now { display: inline-block; font-family: var(--mono); font-size: 11.5px; padding: 2px 8px; border-radius: 99px; border: 1px solid var(--ok); color: var(--ok); margin-left: 8px; vertical-align: middle; }
+
+  /* Stack */
+  .stack { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 28px 32px; }
+  .stack h3 { font-size: 1rem; margin: 0 0 10px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip { font-family: var(--mono); font-size: 12px; padding: 3px 9px; border-radius: 6px; background: var(--chip); }
+
+
+  /* Proyecto personal */
+  .side { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 28px; display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center; }
+  .side h3 { margin: 0 0 6px; font-size: 1.25rem; letter-spacing: -0.015em; }
+  .side p { margin: 0; color: var(--muted); max-width: 40em; }
+
+  /* Contacto */
+  .contact { text-align: center; }
+  .contact .sub { margin-left: auto; margin-right: auto; }
+  .contact .cta { justify-content: center; }
+  footer { border-top: 1px solid var(--line); padding: 24px 0 36px; color: var(--muted); font-size: 14px; text-align: center; }
+
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  @media (max-width: 820px) {
+    .hero { padding: 44px 0 40px; }
+    .hero .wrap, .about, .areas { grid-template-columns: 1fr; gap: 24px; }
+    .job { grid-template-columns: 1fr; gap: 4px; }
+    .side { grid-template-columns: 1fr; }
+    .nav nav { display: none; }
+    section { padding: 48px 0; }
+  }
+  @media (max-width: 480px) {
+    .wrap { padding: 0 16px; }
+    .stats { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#inicio">Javy Fernández</a>
+    <nav aria-label="Secciones">
+      <a href="#sobre-mi">Sobre mí</a>
+      <a href="#areas">Áreas</a>
+      <a href="#experiencia">Experiencia</a>
+      <a href="#stack">Stack</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </div>
+</header>
+
+<main id="inicio">
+
+  <div class="hero">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">Javier Fernández · Palma de Mallorca</p>
+        <h1>Manager y .NET Engineer. Software empresarial con Azure, DevOps e IA.</h1>
+        <p class="lead">Lidero el equipo técnico y sigo programando. En Raona diseño arquitectura .NET, gestiono la entrega continua en Azure DevOps e integro la IA en el ciclo de desarrollo.</p>
+        <div class="cta">
+          <a class="btn primary" href="#contacto">Contactar</a>
+          <a class="btn" href="https://www.linkedin.com/in/javy-fernandez/" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="btn" href="https://github.com/javy-fernandez" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+
+      <div class="code" role="img" aria-label="Fragmento de código C# que resume el perfil: Manager y .NET Engineer en Raona, con .NET, Azure y DevOps, y foco en IA aplicada al desarrollo.">
+        <div class="bar"><i></i><i></i><i></i><span>Perfil.cs</span></div>
+<pre><span class="k">var</span> javy = <span class="k">new</span> <span class="t">Engineer</span>
+{
+    Rol     = <span class="s">"Manager · .NET Engineer"</span>,
+    Empresa = <span class="s">"Raona"</span>,
+    Stack   = [<span class="s">".NET"</span>, <span class="s">"Azure"</span>, <span class="s">"DevOps"</span>],
+    Foco    = <span class="s">"IA aplicada al desarrollo"</span>,
+    Desde   = <span class="n">1998</span>
+};
+
+<span class="c">// Arquitectura, equipo y entrega continua</span>
+<span class="k">await</span> javy.<span class="t">ShipAsync</span>();</pre>
+      </div>
+    </div>
+
+    <div class="wrap">
+      <div class="stats">
+        <div class="stat"><b>+25 años</b><span>Trabajando en el sector tecnológico</span></div>
+        <div class="stat"><b>.NET</b><span>Del escritorio con WinForms a APIs en Azure</span></div>
+        <div class="stat"><b>CI/CD</b><span>Pipelines y despliegues en Azure DevOps y GitHub</span></div>
+      </div>
+    </div>
+  </div>
+
+  <section id="sobre-mi">
+    <div class="wrap">
+      <p class="kicker">Sobre mí</p>
+      <h2>Desarrollo activo y liderazgo técnico</h2>
+      <p class="sub">Construyo soluciones empresariales robustas, escalables y pensadas para evolucionar.</p>
+      <div class="about">
+        <div>
+          <p>Soy desarrollador .NET senior y manager. Combino el desarrollo del día a día con el liderazgo técnico del equipo: defino arquitectura, tomo decisiones tecnológicas y cuido las buenas prácticas de calidad y diseño.</p>
+          <p>Trabajo codo con codo con el Project Manager y con el cliente en la planificación, la estimación y la definición funcional, para que la visión de negocio y la ejecución técnica vayan alineadas.</p>
+        </div>
+        <div>
+          <p>Me muevo sobre todo en el ecosistema Microsoft, con aplicaciones web y de escritorio, y gestiono Azure DevOps: pipelines, automatización de despliegues, integración continua y estrategias CI/CD.</p>
+          <p>Mi vínculo con la programación empezó en 1989 con un Amstrad CPC 464 y su manual de BASIC. Desde entonces la tecnología no es solo mi profesión, sino una vocación constante.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="areas">
+    <div class="wrap">
+      <p class="kicker">Áreas</p>
+      <h2>En qué aporto valor</h2>
+      <p class="sub">Tres frentes que en mi día a día van siempre juntos.</p>
+
+      <div class="areas">
+        <div class="area">
+          <span class="num">01</span>
+          <h3>Gestión y liderazgo técnico</h3>
+          <ul>
+            <li>Coordinación del equipo de desarrollo y revisiones de código.</li>
+            <li>Planificación, estimación y definición funcional con el Project Manager y el cliente.</li>
+            <li>Mentoría a desarrolladores junior.</li>
+          </ul>
+        </div>
+        <div class="area">
+          <span class="num">02</span>
+          <h3>Desarrollo .NET y Azure</h3>
+          <ul>
+            <li>Servicios y APIs RESTful con clean architecture.</li>
+            <li>Diseño y optimización de bases de datos en SQL Server.</li>
+            <li>Recursos cloud en Azure y pipelines CI/CD en Azure DevOps y GitHub Actions.</li>
+            <li>Control de versiones con Git y revisión por pull requests en GitHub.</li>
+          </ul>
+        </div>
+        <div class="area">
+          <span class="num">03</span>
+          <h3>IA aplicada al desarrollo</h3>
+          <ul>
+            <li>Factoría agéntica de software: agentes de IA coordinados a lo largo del ciclo de entrega, con supervisión humana.</li>
+            <li>Agentes de código y asistentes, como GitHub Copilot, integrados en el flujo de trabajo del equipo.</li>
+            <li>Apoyo de la IA en análisis, implementación, revisión y documentación.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experiencia">
+    <div class="wrap">
+      <p class="kicker">Experiencia</p>
+      <h2>Trayectoria profesional</h2>
+      <p class="sub">De técnico informático en 1998 a liderar equipos de desarrollo.</p>
+
+      <ol class="timeline">
+        <li class="job">
+          <div class="when">2025 – actualidad</div>
+          <div>
+            <h3>Liderazgo técnico, Azure y DevOps <span class="now">actual</span></h3>
+            <p>Lidero el equipo de desarrollo y sigo programando: arquitectura y APIs RESTful con .NET, soluciones en Microsoft Azure, pipelines CI/CD en Azure DevOps y GitHub Actions, control de versiones con Git y pull requests en GitHub, planificación con cliente y Project Manager, y mentoría a desarrolladores junior.</p>
+          </div>
+        </li>
+        <li class="job">
+          <div class="when">2022 – 2024</div>
+          <div>
+            <h3>Aplicaciones empresariales con .NET</h3>
+            <p>Desarrollo full-stack de aplicaciones web y de escritorio con C#, tanto en .NET Framework como en las versiones actuales de .NET, con Blazor y ASP.NET MVC. Programación de APIs, bases de datos SQL Server con T-SQL y aplicaciones de terminal para gestionar maquinaria.</p>
+          </div>
+        </li>
+        <li class="job">
+          <div class="when">2012 – 2022</div>
+          <div>
+            <h3>Backend y desarrollo web</h3>
+            <p>Aplicaciones backend y de escritorio con C#, .NET Framework, WinForms y SQL Server. Con el tiempo se sumaron servicios API REST con Java y Spring Boot, bases de datos MySQL y PostgreSQL, y frontend con HTML, CSS, JavaScript y Angular.</p>
+          </div>
+        </li>
+        <li class="job">
+          <div class="when">2000 – 2012</div>
+          <div>
+            <h3>Programación de aplicaciones Windows</h3>
+            <p>Software a medida para sistemas Windows con C y Visual Basic y, a partir de su lanzamiento en 2002, con .NET Framework.</p>
+          </div>
+        </li>
+        <li class="job">
+          <div class="when">1998 – 2000</div>
+          <div>
+            <h3>Soporte técnico y sistemas</h3>
+            <p>Reparación, montaje y mantenimiento de equipos, redes y atención al cliente.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="stack">
+    <div class="wrap">
+      <p class="kicker">Stack</p>
+      <h2>Con qué trabajo</h2>
+      <p class="sub">Ecosistema Microsoft de extremo a extremo, con una visión completa del ciclo de vida del software.</p>
+
+      <div class="stack">
+        <div>
+          <h3>Backend</h3>
+          <div class="chips"><span class="chip">C#</span><span class="chip">.NET</span><span class="chip">ASP.NET Core</span><span class="chip">Web API</span><span class="chip">Entity Framework Core</span><span class="chip">Blazor</span><span class="chip">MVC</span></div>
+        </div>
+        <div>
+          <h3>Cloud y DevOps</h3>
+          <div class="chips"><span class="chip">Microsoft Azure</span><span class="chip">Azure DevOps</span><span class="chip">Git</span><span class="chip">GitHub</span><span class="chip">GitHub Actions</span><span class="chip">Pull requests</span><span class="chip">Pipelines CI/CD</span><span class="chip">Despliegue automatizado</span></div>
+        </div>
+        <div>
+          <h3>IA</h3>
+          <div class="chips"><span class="chip">Factoría agéntica</span><span class="chip">Desarrollo asistido por IA</span><span class="chip">Agentes de código</span><span class="chip">GitHub Copilot</span><span class="chip">Claude Code</span><span class="chip">MCP</span></div>
+        </div>
+        <div>
+          <h3>Gestión</h3>
+          <div class="chips"><span class="chip">Liderazgo técnico</span><span class="chip">Gestión de proyectos</span><span class="chip">Arquitectura</span><span class="chip">Mentoría</span><span class="chip">Scrum</span></div>
+        </div>
+        <div>
+          <h3>Datos</h3>
+          <div class="chips"><span class="chip">SQL Server</span><span class="chip">T-SQL</span><span class="chip">MySQL</span><span class="chip">PostgreSQL</span><span class="chip">SQLite</span></div>
+        </div>
+        <div>
+          <h3>Frontend</h3>
+          <div class="chips"><span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span><span class="chip">Bootstrap</span><span class="chip">Angular</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="proyecto-personal">
+    <div class="wrap">
+      <p class="kicker">Proyecto personal</p>
+      <h2>De la idea a la consola</h2>
+      <p class="sub">Llevar un producto propio hasta una tienda internacional, de principio a fin.</p>
+      <div class="side">
+        <div>
+          <h3>Super Mabus Mania · Nintendo Switch</h3>
+          <p>Videojuego de plataformas que desarrollé como independiente en DD Studios y publiqué en la Nintendo Switch eShop en 2022: concepto, desarrollo y publicación.</p>
+        </div>
+        <a class="btn" href="https://dd-studios.itch.io/" target="_blank" rel="noopener">DD Studios</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacto" class="contact">
+    <div class="wrap">
+      <p class="kicker">Contacto</p>
+      <h2>¿Hablamos?</h2>
+      <p class="sub">Si buscas a alguien que lidere un equipo técnico y siga cerca del código, escríbeme por LinkedIn.</p>
+      <div class="cta">
+        <a class="btn primary" href="https://www.linkedin.com/in/javy-fernandez/" target="_blank" rel="noopener">Escríbeme en LinkedIn</a>
+        <a class="btn" href="https://github.com/javy-fernandez" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">© <span id="y">2026</span> Javier Fernández</div>
+</footer>
+
+<script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+</body>
+</html>
