@@ -356,9 +356,13 @@ footer { padding: 20px 0; border-top: 1px solid var(--border); }
   .identity { margin-bottom: 16px; }
   .identity img { width: 48px; height: 48px; }
   .code-panel { max-width: 26rem; }
-  .code-detail { display: none; }
   .code-bar { padding: 5px 11px; }
-  .code-panel pre { padding: 7px 11px; }
+  .code-panel pre {
+    padding: 10px 11px;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
   .section { padding: 48px 0; }
   .projects { padding-top: 36px; }
   .section-copy { max-width: 55ch; }
